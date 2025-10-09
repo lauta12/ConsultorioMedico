@@ -82,6 +82,8 @@ public class RegistrarPacientePanel extends JPanel {
 
         gbc.gridx = 0; gbc.gridy = 4; add(lblObraSocial, gbc);
         gbc.gridx = 1; add(comboObraSocial, gbc);
+        //TODO: cambiar de color el scroll a azul cuando el usuario aprete y
+        // volver a su color original cuando deje de apretar
 
         gbc.gridx = 0; gbc.gridy = 5; add(lblTelefono, gbc);
         gbc.gridx = 1; add(txtTelefono, gbc);
