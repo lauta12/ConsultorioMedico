@@ -72,7 +72,7 @@ public class Estilos {
                 textField.setFont(new Font("SansSerif", Font.PLAIN, 19));
                 textField.setBorder(bordeNormal);
 
-                // 🎯 Listener para resaltar borde en foco
+                // Listener para resaltar borde en foco
                 textField.addFocusListener(new java.awt.event.FocusAdapter() {
                     @Override
                     public void focusGained(java.awt.event.FocusEvent e) {
@@ -120,7 +120,7 @@ public class Estilos {
                     }
                 });
 
-                // 🔽 Custom Scrollbar en el desplegable
+                // Custom Scrollbar en el desplegable
                 Object comp = comboBox.getUI().getAccessibleChild(comboBox, 0);
                 if (comp instanceof JPopupMenu) {
                     JList<?> list = (JList<?>) ((JScrollPane) ((JPopupMenu) comp).getComponent(0)).getViewport().getView();
