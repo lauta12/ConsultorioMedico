@@ -43,7 +43,7 @@ public class BuscarPacientePanel extends JPanel {
         Estilos.aplicarEstiloBoton(btnBuscar, btnCancelar, btnActualizar, btnEliminar);
         Estilos.aplicarEstiloPanel(panelSuperior);
         Estilos.aplicarEstiloTabla(tablaPacientes);
-        Estilos.aplicarEstiloScroll(scroll);
+        Estilos.aplicarEstiloScrollPane(scroll);
     }
 
     private void configurarLayout() {
