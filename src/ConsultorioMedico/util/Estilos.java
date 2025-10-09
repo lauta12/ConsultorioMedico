@@ -1,5 +1,7 @@
 package ConsultorioMedico.util;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -326,6 +328,14 @@ public class Estilos {
         });
     }
 
+
+    public static void aplicarEstiloDateChooser(JDateChooser chooser) {
+        chooser.getCalendarButton().setBackground(new Color(50, 50, 50));
+        chooser.getCalendarButton().setForeground(Color.WHITE);
+        chooser.setBackground(new Color(50, 50, 50));
+        ((JTextField) chooser.getDateEditor().getUiComponent()).setBackground(new Color(50, 50, 50));
+        ((JTextField) chooser.getDateEditor().getUiComponent()).setForeground(Color.WHITE);
+    }
 
 
     private static JButton crearBotonInvisible() {
