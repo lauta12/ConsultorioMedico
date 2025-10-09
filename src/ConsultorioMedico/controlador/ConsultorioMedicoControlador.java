@@ -91,7 +91,7 @@ public class ConsultorioMedicoControlador {
             Estilos.limpiarTextFields(panelBuscar);
         });
 
-        // Panel Buscar. Boton Eliminar
+        // Panel Buscar Paciente. Boton Eliminar
         vista.getBuscarPacientePanel().getBtnEliminar().addActionListener(e -> {
             int filaSeleccionada = vista.getBuscarPacientePanel().getTablaPacientes().getSelectedRow();
 
@@ -112,6 +112,7 @@ public class ConsultorioMedicoControlador {
                 JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente.");
 
             }
+            cargarPacientesEnTabla();
         });
 
         // Panel Registrar Paciente. Boton cancelar
