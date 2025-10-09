@@ -16,7 +16,6 @@ public class BuscarPacientePanel extends JPanel {
     private String[] columnas;
     private JPanel panelSuperior;
     private JPanel panelBuscar;
-    // puedo hacer que se junten esas dos, o sea, voy a listar pacientes y ahi puedo buscar por dni también
 
     public BuscarPacientePanel() {
         inicializarComponentes();
