@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -11,7 +12,13 @@ import java.awt.event.MouseEvent;
 
 public class Estilos {
 
+    public static final Color COLOR_FONDO = new Color(40, 44, 52); // gris oscuro
+    public static final Color COLOR_TEXTO = new Color(230, 230, 230);
+    public static final Color COLOR_PRINCIPAL = new Color(100, 149, 237); // azul suave
+    public static final Color COLOR_BORDE = new Color(70, 70, 70);
+
     public static void aplicarEstiloBoton(Component... componentes) {
+
         for(Component c : componentes) {
             if(c instanceof JButton boton) {
                 boton.setFocusPainted(false);
@@ -181,25 +188,152 @@ public class Estilos {
         }
     }
 
+
+    //  Estilo para JTable (modo oscuro con filas tipo zebra)
     public static void aplicarEstiloTabla(JTable tabla) {
-        // Fondo de la tabla y texto
-        tabla.setBackground(new Color(40, 40, 40));   // gris oscuro
-        tabla.setForeground(Color.WHITE);            // texto blanco
-        tabla.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        //  Colores principales
+        Color fondoTabla = new Color(30, 33, 38);     // fondo general (oscuro, tipo VSCode)
+        Color fondoZebra = new Color(40, 44, 52);     // filas alternadas
+        Color texto = new Color(220, 220, 220);       // texto suave
+        Color seleccion = new Color(70, 110, 200);    // azul de selección
+        Color borde = new Color(55, 60, 68);          // gris azulado para los bordes
 
-        // Color de las filas seleccionadas
-        tabla.setSelectionBackground(new Color(70, 70, 70));
-        tabla.setSelectionForeground(Color.CYAN);
+        //  Configuración general de la tabla
+        tabla.setBackground(fondoTabla);
+        tabla.setForeground(texto);
+        tabla.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        tabla.setRowHeight(28);
+        tabla.setShowGrid(false);
+        tabla.setIntercellSpacing(new Dimension(0, 0));
+        tabla.setFillsViewportHeight(true);
+        tabla.setSelectionBackground(seleccion);
+        tabla.setSelectionForeground(Color.WHITE);
+        tabla.setBorder(BorderFactory.createLineBorder(borde));
 
-        // Grid (líneas entre celdas)
-        tabla.setGridColor(new Color(80, 80, 80));
-
-        // Header de la tabla
+        //  Encabezado
         JTableHeader header = tabla.getTableHeader();
-        header.setBackground(new Color(30, 30, 30));
+        header.setBackground(new Color(45, 48, 54));
         header.setForeground(Color.WHITE);
-        header.setFont(new Font("SansSerif", Font.BOLD, 14));
-        header.setReorderingAllowed(false); // opcional: evita mover columnas
+        header.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
+        header.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borde));
+        header.setReorderingAllowed(false);
+        header.setOpaque(true);
+
+        //  Renderer personalizado (filas alternadas)
+        tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (!isSelected) {
+                    c.setBackground(row % 2 == 0 ? fondoTabla : fondoZebra);
+                    c.setForeground(texto);
+                }
+                return c;
+            }
+        });
+    }
+
+    public static void aplicarEstiloScrollPane(JScrollPane scrollPane) {
+        Color fondo = new Color(30, 33, 38);          // Fondo general
+        Color borde = new Color(55, 60, 68);          // Borde del scroll
+        Color thumbNormal = new Color(80, 85, 95);    // Reposo
+        Color thumbHover = new Color(100, 105, 115);  // Hover
+        Color thumbPressed = new Color(70, 110, 200); // Azul al arrastrar
+        Color trackColor = new Color(40, 44, 52);     // Fondo del track
+
+        scrollPane.getViewport().setBackground(fondo);
+        scrollPane.setBorder(BorderFactory.createLineBorder(borde));
+        scrollPane.getVerticalScrollBar().setBackground(trackColor);
+        scrollPane.getHorizontalScrollBar().setBackground(trackColor);
+
+        //  ScrollBar personalizado
+        scrollPane.getVerticalScrollBar().setUI(new javax.swing.plaf.basic.BasicScrollBarUI() {
+            private boolean dragging = false;
+            private boolean hovering = false;
+
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = thumbNormal;
+                this.trackColor = trackColor;
+            }
+
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton button = new JButton();
+                button.setPreferredSize(new Dimension(0, 0));
+                button.setMinimumSize(new Dimension(0, 0));
+                button.setMaximumSize(new Dimension(0, 0));
+                return button;
+            }
+
+            @Override
+            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                if (!scrollbar.isEnabled() || thumbBounds.width > thumbBounds.height && scrollbar.getOrientation() == JScrollBar.VERTICAL)
+                    return;
+
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                Color currentColor = dragging
+                        ? thumbPressed
+                        : (hovering ? thumbHover : thumbNormal);
+
+                g2.setColor(currentColor);
+                g2.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height, 8, 8);
+                g2.dispose();
+            }
+
+            @Override
+            protected void installListeners() {
+                super.installListeners();
+                scrollbar.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
+                        hovering = true;
+                        scrollbar.repaint();
+                    }
+
+                    @Override
+                    public void mouseExited(java.awt.event.MouseEvent e) {
+                        hovering = false;
+                        scrollbar.repaint();
+                    }
+
+                    @Override
+                    public void mousePressed(java.awt.event.MouseEvent e) {
+                        dragging = true;
+                        scrollbar.repaint();
+                    }
+
+                    @Override
+                    public void mouseReleased(java.awt.event.MouseEvent e) {
+                        dragging = false;
+                        scrollbar.repaint();
+                    }
+                });
+            }
+        });
+    }
+
+
+
+    private static JButton crearBotonInvisible() {
+        JButton boton = new JButton();
+        boton.setPreferredSize(new Dimension(0, 0));
+        boton.setMinimumSize(new Dimension(0, 0));
+        boton.setMaximumSize(new Dimension(0, 0));
+        return boton;
     }
 
     public static void aplicarEstiloScroll(JScrollPane scroll) {
