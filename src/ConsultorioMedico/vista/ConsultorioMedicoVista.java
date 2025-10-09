@@ -12,7 +12,7 @@ public class ConsultorioMedicoVista extends JFrame {
     private MenuPanel menuPanel;
     private RegistrarPacientePanel registrarPacientePanel;
     private BuscarPacientePanel buscarPacientePanel;
-    private SacarTurnoPanel sacarTurnoPanel;
+    private AsignarTurnoPanel sacarTurnoPanel;
 
     // guardo el boton
     private JButton btnVolver;
@@ -29,7 +29,7 @@ public class ConsultorioMedicoVista extends JFrame {
         menuPanel = new MenuPanel();
         registrarPacientePanel = new RegistrarPacientePanel();
         buscarPacientePanel = new BuscarPacientePanel();
-        sacarTurnoPanel = new SacarTurnoPanel();
+        sacarTurnoPanel = new AsignarTurnoPanel();
     }
 
     private void configurarVentana() {
