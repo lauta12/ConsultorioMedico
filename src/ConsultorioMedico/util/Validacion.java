@@ -2,9 +2,9 @@ package ConsultorioMedico.util;
 
 import ConsultorioMedico.vista.RegistrarPacientePanel;
 
-import javax.swing.*;
+import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.Color;
 
 public class Validacion {
 

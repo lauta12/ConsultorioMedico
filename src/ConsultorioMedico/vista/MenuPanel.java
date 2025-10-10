@@ -1,11 +1,14 @@
 package ConsultorioMedico.vista;
 
 import ConsultorioMedico.util.Estilos;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 public class MenuPanel extends JPanel {
-
     private JButton btnRegistrarPaciente;
     private JButton btnAsignarTurno;
     private JButton btnBuscarPaciente;

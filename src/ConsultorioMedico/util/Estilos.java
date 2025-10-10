@@ -1,16 +1,35 @@
 package ConsultorioMedico.util;
 
 import com.toedter.calendar.JDateChooser;
-
-import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JPopupMenu;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JComponent;
+import javax.swing.BorderFactory;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 
 public class Estilos {
 

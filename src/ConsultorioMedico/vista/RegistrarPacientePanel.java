@@ -1,12 +1,20 @@
 package ConsultorioMedico.vista;
 
 import ConsultorioMedico.util.Estilos;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import javax.swing.UIManager;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Color;
 
 public class RegistrarPacientePanel extends JPanel {
-
     private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblObraSocial, lblTelefono;
     private JTextField txtNombre, txtApellido, txtDni, txtTelefono;
     private JButton btnGuardar, btnCancelar;
@@ -53,7 +61,6 @@ public class RegistrarPacientePanel extends JPanel {
     }
 
     private void configurarLayout() {
-
         aplicarEstilos();
 
         setLayout(new GridBagLayout());
@@ -128,6 +135,5 @@ public class RegistrarPacientePanel extends JPanel {
     public void setApellido(String apellido) { txtApellido.setText(apellido); }
     public void setDni(String dni) { txtDni.setText(dni); }
     public void setTelefono(String telefono) { txtTelefono.setText(telefono); }
-    //public void setComboObraSocial(String obraSocial) { comboObraSocial.setSelectedItem(obraSocial); }
 
 }
