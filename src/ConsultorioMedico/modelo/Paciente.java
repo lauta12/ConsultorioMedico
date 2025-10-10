@@ -1,7 +1,5 @@
 package ConsultorioMedico.modelo;
 
-import ConsultorioMedico.vista.RegistrarPacientePanel;
-
 public class Paciente {
     private String nombre, apellido, dni, obraSocial, telefono;
 
