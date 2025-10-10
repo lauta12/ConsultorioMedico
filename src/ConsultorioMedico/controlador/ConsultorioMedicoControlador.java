@@ -8,7 +8,7 @@ import ConsultorioMedico.vista.BuscarPacientePanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
 import ConsultorioMedico.vista.RegistrarPacientePanel;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultorioMedicoControlador {
@@ -136,7 +136,7 @@ public class ConsultorioMedicoControlador {
 
                 dao.guardarPaciente(paciente);
 
-                // limpia los campos despues de guardar los datos
+                // limpia los campos después de guardar los datos
                 Estilos.limpiarTextFields(panelRegistrar);
             } else {
                 JOptionPane.showMessageDialog(vista, "Hay errores en el forumlario. " +
@@ -144,8 +144,6 @@ public class ConsultorioMedicoControlador {
             }
 
         });
-
-
     }
 
     private void cargarPacientesEnTabla() {
