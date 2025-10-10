@@ -2,9 +2,14 @@ package ConsultorioMedico.vista;
 
 import com.toedter.calendar.JDateChooser;
 import ConsultorioMedico.util.Estilos;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class AsignarTurnoPanel extends JPanel {
     // componentes
@@ -26,7 +31,6 @@ public class AsignarTurnoPanel extends JPanel {
     }
 
     private void inicializarComponentes() {
-
         lblTitulo = new JLabel("Asignar Turno");
         lblPaciente = new JLabel("Paciente:");
         comboPacientes = new JComboBox<>();
@@ -40,7 +44,8 @@ public class AsignarTurnoPanel extends JPanel {
     }
 
     private void aplicarEstilos() {
-        Estilos.aplicarEstiloLabel(lblTitulo, lblFecha, lblDoctor, lblHora, lblPaciente);
+        Estilos.aplicarEstiloTitulo(lblTitulo);
+        Estilos.aplicarEstiloLabel(lblFecha, lblDoctor, lblHora, lblPaciente);
         Estilos.aplicarEstiloTextField(txtHora);
         Estilos.aplicarEstiloBoton(btnAsignar);
         Estilos.aplicarEstiloComboBox(comboDoctores, comboPacientes);
@@ -88,6 +93,8 @@ public class AsignarTurnoPanel extends JPanel {
         gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
         add(btnAsignar, gbc);
 
-
     }
+
+    public JComboBox<String> getComboDoctores() { return comboDoctores; }
+    public JComboBox<String> getComboPacientes() { return comboPacientes; }
 }
