@@ -78,7 +78,7 @@ public class PacienteDAO {
 
     public List<Paciente> listarTodos() {
         List<Paciente> lista = new ArrayList<>();
-        String sql = "SELECT dni, nombre, apellido, telefono, obra_social FROM pacientes";
+        String sql = "SELECT dni, nombre, apellido, telefono, obra_social FROM pacientes ORDER BY nombre ASC";
 
         try (Connection conn = Conexion.getConexion();
              PreparedStatement stmt = conn.prepareStatement(sql);
