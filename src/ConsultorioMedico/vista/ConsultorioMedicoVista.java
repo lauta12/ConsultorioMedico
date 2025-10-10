@@ -15,7 +15,7 @@ public class ConsultorioMedicoVista extends JFrame {
     private MenuPanel menuPanel;
     private RegistrarPacientePanel registrarPacientePanel;
     private BuscarPacientePanel buscarPacientePanel;
-    private AsignarTurnoPanel sacarTurnoPanel;
+    private AsignarTurnoPanel asignarTurnoPanel;
 
     // guardo el boton
     private JButton btnVolver;
@@ -32,7 +32,7 @@ public class ConsultorioMedicoVista extends JFrame {
         menuPanel = new MenuPanel();
         registrarPacientePanel = new RegistrarPacientePanel();
         buscarPacientePanel = new BuscarPacientePanel();
-        sacarTurnoPanel = new AsignarTurnoPanel();
+        asignarTurnoPanel = new AsignarTurnoPanel();
     }
 
     private void configurarVentana() {
@@ -48,7 +48,7 @@ public class ConsultorioMedicoVista extends JFrame {
         panelPrincipal.add(menuPanel, "menu");
         panelPrincipal.add(registrarPacientePanel, "registrar");
         panelPrincipal.add(buscarPacientePanel, "buscar");
-        panelPrincipal.add(sacarTurnoPanel, "turno");
+        panelPrincipal.add(asignarTurnoPanel, "turno");
 
         this.add(panelPrincipal, BorderLayout.CENTER);
         this.setVisible(true);
@@ -57,12 +57,13 @@ public class ConsultorioMedicoVista extends JFrame {
     public MenuPanel getMenuPanel() { return menuPanel; }
     public RegistrarPacientePanel getRegistrarPacientePanel() { return registrarPacientePanel; }
     public BuscarPacientePanel getBuscarPacientePanel() { return buscarPacientePanel; }
+    public AsignarTurnoPanel getAsignarTurnoPanel() { return asignarTurnoPanel; }
 
     public void mostrarPantalla(String nombrePantalla) {
         cardLayout.show(panelPrincipal, nombrePantalla);
     }
 
     private void aplicarEstilos() {
-        Estilos.aplicarEstiloPanel(menuPanel, registrarPacientePanel, buscarPacientePanel, sacarTurnoPanel);
+        Estilos.aplicarEstiloPanel(menuPanel, registrarPacientePanel, buscarPacientePanel, asignarTurnoPanel);
     }
 }
