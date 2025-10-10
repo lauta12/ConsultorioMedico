@@ -1,12 +1,17 @@
 package ConsultorioMedico.vista;
 
 import ConsultorioMedico.util.Estilos;
-import javax.swing.*;
+import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 public class BuscarPacientePanel extends JPanel {
-
     private JTable tablaPacientes;
     private DefaultTableModel modelo;
     private JScrollPane scroll;
