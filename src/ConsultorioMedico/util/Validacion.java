@@ -1,12 +1,23 @@
 package ConsultorioMedico.util;
 
+import ConsultorioMedico.dao.PacienteDAO;
+import ConsultorioMedico.modelo.Paciente;
 import ConsultorioMedico.vista.RegistrarPacientePanel;
+import ConsultorioMedico.vista.ConsultorioMedicoVista;
 
 import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 
 public class Validacion {
+    private ConsultorioMedicoVista vista;
+    private PacienteDAO dao;
+
+    public Validacion(ConsultorioMedicoVista vista) {
+        this.vista = vista;
+        this.dao = new PacienteDAO();
+    }
 
     public boolean validarDatos(RegistrarPacientePanel panel) {
         boolean valido = true;
@@ -76,6 +87,22 @@ public class Validacion {
         }
 
         return resultado.toString().trim();
+    }
+
+    public void cargarPacientesEnTabla() {
+        DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+        modelo.setRowCount(0);
+
+        for (Paciente p : dao.listarTodos()) {
+            Object[] fila = {
+                    p.getDni(),
+                    p.getNombre(),
+                    p.getApellido(),
+                    p.getTelefono(),
+                    p.getObraSocial()
+            };
+            modelo.addRow(fila);
+        }
     }
 
 
