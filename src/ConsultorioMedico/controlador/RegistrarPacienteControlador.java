@@ -21,7 +21,6 @@ public class RegistrarPacienteControlador {
 
         // panel registrar paciente. Boton guardar.
         vista.getRegistrarPacientePanel().getBtnGuardar().addActionListener(e -> {
-            panelRegistrar.resetBorders();
 
             if(validador.validarDatos(panelRegistrar)) {
                 Paciente paciente = new Paciente(
@@ -38,7 +37,7 @@ public class RegistrarPacienteControlador {
                 Estilos.limpiarTextFields(panelRegistrar);
             } else {
                 JOptionPane.showMessageDialog(vista, "Hay errores en el forumlario. " +
-                        "Revise nuevamente los campos.", "Error de validacion", JOptionPane.ERROR_MESSAGE);
+                        "Revise nuevamente los campos.", "Error de validación", JOptionPane.ERROR_MESSAGE);
             }
 
         });
@@ -48,6 +47,7 @@ public class RegistrarPacienteControlador {
         vista.getRegistrarPacientePanel().getBtnCancelar().addActionListener(e -> {
             vista.mostrarPantalla("menu");
             Estilos.limpiarTextFields(panelRegistrar);
+            panelRegistrar.getComboObraSocial().setSelectedIndex(0);
         });
     }
 
