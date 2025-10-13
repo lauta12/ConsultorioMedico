@@ -1,54 +1,36 @@
 package ConsultorioMedico.modelo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Turno {
-    private int id;
+    private int idTurno;
+    private int idDoctor;
     private String dniPaciente;
-    private String fecha;
-    private String hora;
-    private String motivo;
-    private String estado;
+    private LocalDate fecha;
+    private LocalTime hora;
 
-    public Turno() {
+    public Turno() {}
 
-    }
-
-    // getters
-    public int getId() { return id; }
-
-    public String getDniPaciente() { return dniPaciente; }
-
-    public String getEstado() { return estado; }
-
-    public String getFecha() { return fecha; }
-
-    public String getHora() { return hora; }
-
-    public String getMotivo() { return motivo; }
-
-    // setters
-
-    public void setDniPaciente(String dniPaciente) {
+    public Turno(String dniPaciente, int idDoctor, LocalDate fecha, LocalTime hora) {
         this.dniPaciente = dniPaciente;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public void setFecha(String fecha) {
+        this.idDoctor = idDoctor;
         this.fecha = fecha;
-    }
-
-    public void setHora(String hora) {
         this.hora = hora;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // getters
+    public int getIdDoctor() { return idDoctor; }
+    public int getIdTurno() { return idTurno; }
+    public String getDniPaciente() { return dniPaciente; }
+    public LocalDate getFecha() { return fecha; }
+    public LocalTime getHora() { return hora; }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+    // setters
+    public void setDniPaciente(String dniPaciente) { this.dniPaciente = dniPaciente; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public void setHora(LocalTime hora) { this.hora = hora; }
+    public void setIdDoctor(int idDoctor) { this.idDoctor = idDoctor; }
+    public void setIdTurno(int idTurno) { this.idTurno = idTurno; }
 }
 
