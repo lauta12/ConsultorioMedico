@@ -7,12 +7,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import javax.swing.UIManager;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Color;
 
 public class RegistrarPacientePanel extends JPanel {
     private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblObraSocial, lblTelefono;
@@ -54,10 +51,6 @@ public class RegistrarPacientePanel extends JPanel {
 
     private void aplicarEstilos() {
         Estilos.aplicarEstiloTitulo(lblTitulo);
-        Estilos.aplicarEstiloLabel(lblNombre, lblApellido, lblDni, lblObraSocial, lblTelefono);
-        Estilos.aplicarEstiloTextField(txtNombre, txtApellido, txtDni, txtTelefono);
-        Estilos.aplicarEstiloBoton(btnGuardar, btnCancelar);
-        Estilos.aplicarEstiloComboBox(comboObraSocial);
     }
 
     private void configurarLayout() {
@@ -89,30 +82,12 @@ public class RegistrarPacientePanel extends JPanel {
 
         gbc.gridx = 0; gbc.gridy = 4; add(lblObraSocial, gbc);
         gbc.gridx = 1; add(comboObraSocial, gbc);
-        //TODO: cambiar de color el scroll a azul cuando el usuario aprete y
-        // volver a su color original cuando deje de apretar
 
         gbc.gridx = 0; gbc.gridy = 5; add(lblTelefono, gbc);
         gbc.gridx = 1; add(txtTelefono, gbc);
 
         gbc.gridx = 0; gbc.gridy = 6; add(btnGuardar, gbc);
         gbc.gridx = 1; add(btnCancelar, gbc);
-    }
-
-    public void resetBorders() {
-        txtNombre.setBorder(UIManager.getBorder("TextField.border"));
-        txtApellido.setBorder(UIManager.getBorder("TextField.border"));
-        txtDni.setBorder(UIManager.getBorder("TextField.border"));
-        txtTelefono.setBorder(UIManager.getBorder("TextField.border"));
-        getComboObraSocial().setBorder(UIManager.getBorder("ComboBox.border"));
-    }
-
-    public void limpiarErrores() {
-        Color gris = new Color(200,200,200);
-        txtNombre.setBorder(new LineBorder(gris, 1));
-        txtApellido.setBorder(new LineBorder(gris, 1));
-        txtDni.setBorder(new LineBorder(gris, 1));
-        txtTelefono.setBorder(new LineBorder(gris, 1));
     }
 
     // getters
