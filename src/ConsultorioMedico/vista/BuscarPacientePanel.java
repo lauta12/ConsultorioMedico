@@ -1,12 +1,7 @@
 package ConsultorioMedico.vista;
 
-import ConsultorioMedico.util.Estilos;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+//import ConsultorioMedico.util.Estilos;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -20,7 +15,6 @@ public class BuscarPacientePanel extends JPanel {
     private JTextField txtDni;
     private String[] columnas;
     private JPanel panelSuperior;
-    private JPanel panelBuscar;
 
     public BuscarPacientePanel() {
         inicializarComponentes();
@@ -38,16 +32,8 @@ public class BuscarPacientePanel extends JPanel {
 
         modelo = new DefaultTableModel(columnas, 0);
         tablaPacientes = new JTable(modelo);
+        tablaPacientes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scroll = new JScrollPane(tablaPacientes);
-    }
-
-    private void aplicarEstilos() {
-        Estilos.aplicarEstiloTextField(txtDni);
-        Estilos.aplicarEstiloLabel(lblDni);
-        Estilos.aplicarEstiloBoton(btnBuscar, btnCancelar, btnActualizar, btnEliminar);
-        Estilos.aplicarEstiloPanel(panelSuperior);
-        Estilos.aplicarEstiloTabla(tablaPacientes);
-        Estilos.aplicarEstiloScrollPane(scroll);
     }
 
     private void configurarLayout() {
@@ -62,7 +48,6 @@ public class BuscarPacientePanel extends JPanel {
         panelSuperior.add(btnEliminar);
         panelSuperior.add(btnCancelar);
 
-        aplicarEstilos();
 
         add(panelSuperior, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
