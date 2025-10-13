@@ -27,7 +27,6 @@ public class PacienteDAO {
             stmt.executeUpdate();
 
             System.out.println("Paciente guardado en la base de datos");
-
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -47,8 +46,6 @@ public class PacienteDAO {
             e.printStackTrace();
         }
 
-
-
     }
 
     public Paciente buscarPorDni(String dni) {
@@ -56,7 +53,9 @@ public class PacienteDAO {
 
         try(Connection conn = Conexion.getConexion();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, dni);
+
             var rs = stmt.executeQuery();
 
             if(rs.next()) {
