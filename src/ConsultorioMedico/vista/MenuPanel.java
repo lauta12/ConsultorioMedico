@@ -13,6 +13,7 @@ public class MenuPanel extends JPanel {
     private JButton btnAsignarTurno;
     private JButton btnBuscarPaciente;
     private JLabel lblTitulo;
+    private JLabel lblVersion;
 
     public MenuPanel() {
         inicializarComponentes();
@@ -26,6 +27,8 @@ public class MenuPanel extends JPanel {
         btnRegistrarPaciente = new JButton("Registrar Paciente");
         btnBuscarPaciente = new JButton("Buscar Paciente");
         btnAsignarTurno = new JButton("Asignar Turno");
+
+        lblVersion = new JLabel("Version 2.0.0");
     }
 
     private void configurarLayout() {
@@ -38,9 +41,8 @@ public class MenuPanel extends JPanel {
 
         add(lblTitulo, BorderLayout.NORTH);
         add(panelBotones, BorderLayout.CENTER);
+        add(lblVersion, BorderLayout.SOUTH);
 
-        Estilos.aplicarEstiloPanel(panelBotones);
-        Estilos.aplicarEstiloBoton(btnRegistrarPaciente, btnBuscarPaciente, btnAsignarTurno);
         Estilos.aplicarEstiloTitulo(lblTitulo);
     }
 
