@@ -11,6 +11,11 @@ public class Paciente {
         this.telefono = telefono;
     }
 
+    @Override
+    public String toString() {
+        return STR."\{nombre} - \{apellido} - \{dni}";
+    }
+
     // getters y setters
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
