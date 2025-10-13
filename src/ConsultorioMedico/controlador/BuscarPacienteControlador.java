@@ -12,13 +12,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class BuscarPacienteControlador {
     private ConsultorioMedicoVista vista;
-    private PacienteDAO pacienteDAO = new PacienteDAO();
+    private PacienteDAO pacienteDAO;
     private BuscarPacientePanel panelBuscar;
-    private Validacion validador = new Validacion(vista);
+    private Validacion validador;
 
     public BuscarPacienteControlador(ConsultorioMedicoVista vista) {
         this.vista = vista;
         this.panelBuscar = vista.getBuscarPacientePanel();
+        this.pacienteDAO = new PacienteDAO();
+        this.validador = new Validacion(vista);
 
         // boton Buscar
         vista.getBuscarPacientePanel().getBtnBuscar().addActionListener(e -> {
@@ -48,9 +50,7 @@ public class BuscarPacienteControlador {
                 JOptionPane.showMessageDialog(vista, "No se encontró paciente con ese DNI",
                         "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
             }
-
         });
-
 
         // Panel BuscarPaciente. Botón cancelar
         vista.getBuscarPacientePanel().getBtnCancelar().addActionListener(e -> {
@@ -68,28 +68,32 @@ public class BuscarPacienteControlador {
 
         // Panel Buscar Paciente. Boton Eliminar
         vista.getBuscarPacientePanel().getBtnEliminar().addActionListener(e -> {
-            int filaSeleccionada = vista.getBuscarPacientePanel().getTablaPacientes().getSelectedRow();
+            int[] filasSeleccionadas = vista.getBuscarPacientePanel().getTablaPacientes().getSelectedRows();
 
-            if(filaSeleccionada == -1) {
-                JOptionPane.showMessageDialog(null, "Selecciona un paciente para eliminar.");
+            if(filasSeleccionadas.length == 0) {
+                JOptionPane.showMessageDialog(null, "Selecciona al menos un paciente para eliminar.");
                 return;
             }
 
-            String dni = (String) vista.getBuscarPacientePanel().getModelo().getValueAt(filaSeleccionada, 0);
-
-            int confirm = JOptionPane.showConfirmDialog(null,
-                    "Seguro que queres eliminar al paciente con DNI: " + dni + "?",
-                    "Confirmar eliminacion", JOptionPane.YES_NO_OPTION);
-
+            //TODO: permitir borrar todos los campos seleccionados, actualmente te borra uno solo aunque selecciones muchos.
+            int confirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "Seguro que querés eliminar " + filasSeleccionadas.length + " paciente(s)?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION);
 
             if(confirm == JOptionPane.YES_OPTION) {
-                pacienteDAO.eliminarPorDni(dni);
-                JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente.");
+                DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
 
+                for(int i = filasSeleccionadas.length - 1; i >=0; i--) {
+                    String dni = (String) modelo.getValueAt(filasSeleccionadas[i], 0);
+                    pacienteDAO.eliminarPorDni(dni);
+                }
+
+                JOptionPane.showMessageDialog(null, "Paciente(s) eliminado(s) correctamente.");
+                validador.cargarPacientesEnTabla();
             }
-            validador.cargarPacientesEnTabla();
         });
-
 
     }
 }
