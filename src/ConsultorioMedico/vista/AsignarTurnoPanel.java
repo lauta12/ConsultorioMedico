@@ -1,7 +1,7 @@
 package ConsultorioMedico.vista;
 
-import com.toedter.calendar.JDateChooser;
 import ConsultorioMedico.util.Estilos;
+import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Date;
 
 public class AsignarTurnoPanel extends JPanel {
     // componentes
@@ -26,6 +27,14 @@ public class AsignarTurnoPanel extends JPanel {
     private JLabel lblFecha;
     private JLabel lblHora;
 
+    String[] opciones = {
+            "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00",
+            "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+            "15:30", "16:00", "16:30", "17:00", "17:30"
+    };
+
+    private JComboBox<String> comboHora;
+
     public AsignarTurnoPanel() {
         inicializarComponentes();
         configurarLayout();
@@ -39,19 +48,15 @@ public class AsignarTurnoPanel extends JPanel {
         comboDoctores = new JComboBox<>();
         lblFecha = new JLabel("Fecha:");
         dateChooser = new JDateChooser();
-        lblHora = new JLabel("Hora (HH:MM):");
-        txtHora = new JTextField();
-        btnAsignar = new JButton("Asignar Turno");
+        lblHora = new JLabel("Hora:");
+        comboHora = new JComboBox<>(opciones);
+        btnAsignar = new JButton("Guardar Turno");
         btnCancelar = new JButton("Cancelar");
     }
 
     private void aplicarEstilos() {
+        Estilos.aplicarEstiloCalendario(dateChooser);
         Estilos.aplicarEstiloTitulo(lblTitulo);
-        Estilos.aplicarEstiloLabel(lblFecha, lblDoctor, lblHora, lblPaciente);
-        Estilos.aplicarEstiloTextField(txtHora);
-        Estilos.aplicarEstiloBoton(btnAsignar, btnCancelar);
-        Estilos.aplicarEstiloComboBox(comboDoctores, comboPacientes);
-        Estilos.aplicarEstiloDateChooser(dateChooser);
     }
 
     private void configurarLayout() {
@@ -90,7 +95,7 @@ public class AsignarTurnoPanel extends JPanel {
         add(lblHora, gbc);
 
         gbc.gridx = 1;
-        add(txtHora, gbc);
+        add(comboHora, gbc);
 
         gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
         add(btnAsignar, gbc);
@@ -101,5 +106,12 @@ public class AsignarTurnoPanel extends JPanel {
 
     public JComboBox<String> getComboDoctores() { return comboDoctores; }
     public JComboBox<String> getComboPacientes() { return comboPacientes; }
+    public JComboBox<String> getComboHora() { return comboHora; }
     public JButton getBtnCancelar() { return btnCancelar; }
+    public JButton getBtnAsignar() { return btnAsignar; }
+    public JTextField getTxtHora() { return txtHora; }
+    public String getHoraSeleccionada() { return (String) comboHora.getSelectedItem(); }
+    public String getPacienteSeleccionado() { return (String) comboPacientes.getSelectedItem(); }
+    public String getDoctorSeleccionado() { return (String) comboDoctores.getSelectedItem(); }
+    public Date getFechaSeleccionada() { return dateChooser.getDate(); }
 }
