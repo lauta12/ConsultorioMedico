@@ -77,7 +77,6 @@ public class Estilos {
                 btn.setFocusPainted(false);
                 btn.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
                 btn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-
             }
         }
     }
