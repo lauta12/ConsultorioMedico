@@ -17,6 +17,11 @@ public class Doctor {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return nombre + " - " + especialidad;
+    }
+
     // getters y setters
     public int getId_doctor() { return id_doctor; }
     public String getNombre() { return nombre; }
