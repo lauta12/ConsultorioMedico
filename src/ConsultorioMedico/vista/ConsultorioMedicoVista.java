@@ -24,7 +24,6 @@ public class ConsultorioMedicoVista extends JFrame {
         super("Consultorio Medico");
         inicializarComponentes();
         configurarLayout();
-        aplicarEstilos();
         configurarVentana();
     }
 
@@ -63,7 +62,4 @@ public class ConsultorioMedicoVista extends JFrame {
         cardLayout.show(panelPrincipal, nombrePantalla);
     }
 
-    private void aplicarEstilos() {
-        Estilos.aplicarEstiloPanel(menuPanel, registrarPacientePanel, buscarPacientePanel, asignarTurnoPanel);
-    }
 }
