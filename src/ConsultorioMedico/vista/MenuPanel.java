@@ -28,7 +28,7 @@ public class MenuPanel extends JPanel {
         btnBuscarPaciente = new JButton("Buscar Paciente");
         btnAsignarTurno = new JButton("Asignar Turno");
 
-        lblVersion = new JLabel("Version 2.0.0");
+        lblVersion = new JLabel("Version 2.0.1");
     }
 
     private void configurarLayout() {
