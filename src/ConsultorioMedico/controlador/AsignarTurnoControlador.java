@@ -7,10 +7,10 @@ import ConsultorioMedico.modelo.Doctor;
 import ConsultorioMedico.modelo.Paciente;
 import ConsultorioMedico.modelo.Turno;
 import ConsultorioMedico.util.Estilos;
+import ConsultorioMedico.util.Validacion;
 import ConsultorioMedico.vista.AsignarTurnoPanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
 import com.toedter.calendar.JDateChooser;
-
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,7 +24,6 @@ public class AsignarTurnoControlador {
     private PacienteDAO pacienteDAO;
     private TurnoDAO turnoDAO;
     private DoctorDAO doctorDAO;
-    private Turno turno;
     private JDateChooser dateChooser;
 
     public AsignarTurnoControlador(AsignarTurnoPanel vistaAsignarTurnoPanel, ConsultorioMedicoVista vista) {
@@ -33,8 +32,6 @@ public class AsignarTurnoControlador {
         this.vista = vista;
         this.turnoDAO = new TurnoDAO();
         this.doctorDAO = new DoctorDAO();
-        this.turno = new Turno();
-        this.dateChooser = new JDateChooser();
 
         cargarCombos();
 
@@ -44,44 +41,66 @@ public class AsignarTurnoControlador {
             Estilos.limpiarTextFields(vistaAsignarTurnoPanel);
         });
 
+
         // botón Guardar turno
         vista.getAsignarTurnoPanel().getBtnAsignar().addActionListener(e -> {
-            String dniPaciente = turno.getDniPaciente();
-            int idDoctor = turno.getIdDoctor();
-
-            Doctor doctorSeleccionado = (Doctor) vistaAsignarTurnoPanel.getComboDoctores().getSelectedItem();
             Paciente pacienteSeleccionado = (Paciente) vistaAsignarTurnoPanel.getComboPacientes().getSelectedItem();
+            Doctor doctorSeleccionado = (Doctor) vistaAsignarTurnoPanel.getComboDoctores().getSelectedItem();
+            Date fechaSeleccionadaDate = vistaAsignarTurnoPanel.getDateChooser().getDate();
+            String horaSeleccionada = (String) vistaAsignarTurnoPanel.getComboHora().getSelectedItem();
 
-            if(doctorSeleccionado == null || pacienteSeleccionado == null) {
-                JOptionPane.showMessageDialog(vistaAsignarTurnoPanel, "Seleccione un doctor y un paciente.",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+            // validaciones
+            if (pacienteSeleccionado == null) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-
-            Date fechaSeleccionada = vista.getAsignarTurnoPanel().getFechaSeleccionada();
-            LocalDate fecha = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalTime hora = LocalTime.parse(vistaAsignarTurnoPanel.getHoraSeleccionada(), DateTimeFormatter.ofPattern("HH:mm"));
-
-            if(fecha == null || hora == null) {
-                JOptionPane.showMessageDialog(vistaAsignarTurnoPanel,
-                        "Seleccione una fecha y una hora.",
-                        "Error", JOptionPane.ERROR_MESSAGE
-                );
+            if (doctorSeleccionado == null) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un doctor.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-
-
-            Turno turno = new Turno(dniPaciente, idDoctor, fecha, hora);
-            TurnoDAO dao = new TurnoDAO();
-
-            if (dao.guardarTurno(turno)) {
-                JOptionPane.showMessageDialog(vista, "Turno asignado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(vista, "Error al asignar el turno.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (fechaSeleccionadaDate == null) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+
+            if (horaSeleccionada == null || horaSeleccionada.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una hora.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // convierte fecha y hora
+            LocalDate fechaSeleccionada = fechaSeleccionadaDate.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            LocalTime hora;
+            try {
+                hora = LocalTime.parse(horaSeleccionada, DateTimeFormatter.ofPattern("HH:mm"));
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Formato de hora inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            boolean datosValidos = Validacion.validarTurno(vistaAsignarTurnoPanel, pacienteSeleccionado, doctorSeleccionado, fechaSeleccionada, hora);
+            if (!datosValidos) {
+                return;
+            }
+
+            // verifica si ya existe el turno
+            boolean turnoExiste = turnoDAO.existeTurno(doctorSeleccionado, fechaSeleccionada, hora);
+            if (turnoExiste) {
+                JOptionPane.showMessageDialog(null, "El turno ya está asignado en ese horario.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // crea y guarda el turno
+            Turno nuevoTurno = new Turno(pacienteSeleccionado.getDni(), doctorSeleccionado.getId_doctor(), fechaSeleccionada, hora);
+            turnoDAO.guardarTurno(nuevoTurno);
+
+            JOptionPane.showMessageDialog(null, "Turno asignado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         });
+
 
     }
 
@@ -89,13 +108,13 @@ public class AsignarTurnoControlador {
         // LLenar el comboBox de pacientes
         vistaAsignarTurnoPanel.getComboPacientes().removeAllItems();
         for(Paciente p : pacienteDAO.listarTodos()) {
-            vistaAsignarTurnoPanel.getComboPacientes().addItem(p.toString());
+            vistaAsignarTurnoPanel.getComboPacientes().addItem(p);
         }
 
         // Llenar el comboBox de Doctores
         vistaAsignarTurnoPanel.getComboDoctores().removeAllItems();
         for(Doctor d : doctorDAO.listarTodos()) {
-            vistaAsignarTurnoPanel.getComboDoctores().addItem(d.toString());
+            vistaAsignarTurnoPanel.getComboDoctores().addItem(d);
         }
     }
 
