@@ -22,15 +22,17 @@ public class BuscarPacientePanel extends JPanel {
     }
 
     private void inicializarComponentes() {
-        columnas = new String[]{"DNI", "Nombre", "Apellido", "Teléfono", "Obra Social"};
         lblDni = new JLabel("Buscar por DNI: ");
         txtDni = new JTextField(20);
+
         btnBuscar = new JButton("Buscar");
         btnActualizar = new JButton("Actualizar");
         btnEliminar = new JButton("Eliminar");
         btnCancelar = new JButton("Cancelar");
 
+        columnas = new String[]{"DNI", "Nombre", "Apellido", "Teléfono", "Obra Social"};
         modelo = new DefaultTableModel(columnas, 0);
+
         tablaPacientes = new JTable(modelo);
         tablaPacientes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scroll = new JScrollPane(tablaPacientes);
@@ -47,7 +49,6 @@ public class BuscarPacientePanel extends JPanel {
         panelSuperior.add(btnActualizar);
         panelSuperior.add(btnEliminar);
         panelSuperior.add(btnCancelar);
-
 
         add(panelSuperior, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
