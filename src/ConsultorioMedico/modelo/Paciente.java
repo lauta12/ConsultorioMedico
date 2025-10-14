@@ -13,7 +13,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return STR."\{nombre} - \{apellido} - \{dni}";
+        return STR."\{nombre} \{apellido} - (\{dni})";
     }
 
     // getters y setters
