@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorDAO {
-
     public List<Doctor> listarTodos() {
         List<Doctor> doctores = new ArrayList<>();
 
