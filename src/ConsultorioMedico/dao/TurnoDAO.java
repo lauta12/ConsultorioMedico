@@ -1,5 +1,6 @@
 package ConsultorioMedico.dao;
 
+import ConsultorioMedico.modelo.Doctor;
 import ConsultorioMedico.modelo.Turno;
 import ConsultorioMedico.util.Conexion;
 import java.sql.Connection;
@@ -9,6 +10,8 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,27 @@ public class TurnoDAO {
 
             return false;
         }
+    }
+
+    public boolean existeTurno(Doctor doctor, LocalDate fecha, LocalTime hora) {
+        String sql = "SELECT COUNT(*) FROM turnos WHERE id_doctor = ? AND fecha = ? AND hora = ?";
+
+        try(Connection conn = Conexion.getConexion();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, doctor.getId_doctor());
+            ps.setDate(2, Date.valueOf(fecha));
+            ps.setTime(3, Time.valueOf(hora));
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     //leer
