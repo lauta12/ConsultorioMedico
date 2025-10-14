@@ -50,18 +50,41 @@ public class Estilos {
 
     public static void aplicarEstiloCalendario(JDateChooser dateChooser) {
         Component editor = dateChooser.getDateEditor().getUiComponent();
+
         if (editor instanceof JTextField txt) {
-            txt.setBackground(new Color(60, 63, 65));
-            txt.setForeground(Color.WHITE);
-            txt.setCaretColor(Color.WHITE);
+            Color fondo = new Color(60, 63, 65);
+            Color texto = Color.WHITE;
+
+            txt.setBackground(fondo);
+            txt.setForeground(texto);
+            txt.setCaretColor(texto);
             txt.setBorder(BorderFactory.createLineBorder(new Color(90, 90, 90)));
             txt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+
+            //  Evita que cambie el color al ganar/perder foco
+            txt.addFocusListener(new java.awt.event.FocusAdapter() {
+                @Override
+                public void focusGained(java.awt.event.FocusEvent e) {
+                    txt.setForeground(texto);
+                    txt.setBackground(fondo.darker());
+                }
+
+                @Override
+                public void focusLost(java.awt.event.FocusEvent e) {
+                    txt.setForeground(texto);
+                    txt.setBackground(fondo);
+                }
+            });
+
+            // Evita que cambie el color al seleccionar fecha desde el calendario
+            dateChooser.getDateEditor().addPropertyChangeListener("date", evt -> {
+                txt.setForeground(texto);
+                txt.setBackground(fondo);
+            });
         }
 
-        // Obtener el calendario interno
+        // Calendario interno
         JCalendar calendar = dateChooser.getJCalendar();
-
-        // Fondo general
         calendar.setBackground(new Color(43, 43, 43));
         calendar.setForeground(Color.WHITE);
         calendar.setDecorationBackgroundColor(new Color(255, 255, 255));
@@ -69,7 +92,6 @@ public class Estilos {
         calendar.setSundayForeground(new Color(255, 99, 99));
         calendar.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-        // Estilo para los botones de días
         for (Component c : calendar.getDayChooser().getDayPanel().getComponents()) {
             if (c instanceof JButton btn) {
                 btn.setBackground(new Color(43, 43, 43));
@@ -79,7 +101,12 @@ public class Estilos {
                 btn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
             }
         }
+
+        // Botón del calendario
+        dateChooser.getCalendarButton().setBackground(new Color(60, 63, 65));
+        dateChooser.getCalendarButton().setForeground(Color.WHITE);
     }
+
 
     public static void aplicarEstiloTitulo(Component... components) {
         for(Component c : components) {
