@@ -1,14 +1,16 @@
 package ConsultorioMedico.util;
 
 import ConsultorioMedico.dao.PacienteDAO;
+import ConsultorioMedico.modelo.Doctor;
 import ConsultorioMedico.modelo.Paciente;
 import ConsultorioMedico.vista.RegistrarPacientePanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
 
-import javax.swing.JComponent;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Color;
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Validacion {
     private ConsultorioMedicoVista vista;
@@ -93,4 +95,45 @@ public class Validacion {
         }
     }
 
+
+    public static boolean validarTurno(Component parent, Paciente pacienteSeleccionado,
+                                       Doctor doctorSeleccionado, LocalDate fecha, LocalTime hora) {
+        if (pacienteSeleccionado == null) {
+            JOptionPane.showMessageDialog(parent,
+                    "Debe seleccionar un paciente.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (doctorSeleccionado == null) {
+            JOptionPane.showMessageDialog(parent,
+                    "Debe seleccionar un doctor.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (fecha == null || hora == null) {
+            JOptionPane.showMessageDialog(parent,
+                    "Debe seleccionar fecha y hora.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (fecha.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(parent,
+                    "No puede asignar un turno en una fecha anterior a hoy.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // ⏰ Si es hoy, no permitir horas anteriores a la actual
+        if (fecha.equals(LocalDate.now()) && hora.isBefore(LocalTime.now())) {
+            JOptionPane.showMessageDialog(parent,
+                    "No puede asignar un turno antes de la hora actual.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 }
