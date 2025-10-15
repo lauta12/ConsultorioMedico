@@ -98,6 +98,9 @@ public class Validacion {
 
     public static boolean validarTurno(Component parent, Paciente pacienteSeleccionado,
                                        Doctor doctorSeleccionado, LocalDate fecha, LocalTime hora) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate maxFecha = hoy.plusMonths(3);
+        LocalTime ahora = LocalTime.now();
         if (pacienteSeleccionado == null) {
             JOptionPane.showMessageDialog(parent,
                     "Debe seleccionar un paciente.",
@@ -119,17 +122,25 @@ public class Validacion {
             return false;
         }
 
-        if (fecha.isBefore(LocalDate.now())) {
+        if (fecha.isBefore(hoy)) {
             JOptionPane.showMessageDialog(parent,
                     "No puede asignar un turno en una fecha anterior a hoy.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        // ⏰ Si es hoy, no permitir horas anteriores a la actual
-        if (fecha.equals(LocalDate.now()) && hora.isBefore(LocalTime.now())) {
+        // no permite horas anteriores a la actual
+        if (fecha.equals(hoy) && hora.isBefore(ahora)) {
             JOptionPane.showMessageDialog(parent,
                     "No puede asignar un turno antes de la hora actual.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // no permite asignar un turno después de 3 meses
+        if(fecha.isAfter(maxFecha)) {
+            JOptionPane.showMessageDialog(parent,
+                    "No puede asignar un turno después de 3 meses",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
