@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class PacienteDAO {
 
@@ -100,5 +101,26 @@ public class PacienteDAO {
 
         return lista;
     }
+
+    public boolean modificarDatosPaciente(String dni, String nombre, String apellido, String telefono) {
+        String sql = "UPDATE pacientes SET nombre = ?, apellido = ?, telefono = ? WHERE dni = ?";
+        try (Connection conn = Conexion.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nombre);
+            stmt.setString(2, apellido);
+            stmt.setString(3, telefono);
+            stmt.setString(4, dni);
+
+            stmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al actualizar paciente: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 }
