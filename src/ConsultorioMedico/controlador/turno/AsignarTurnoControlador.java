@@ -1,4 +1,4 @@
-package ConsultorioMedico.controlador;
+package ConsultorioMedico.controlador.turno;
 
 import ConsultorioMedico.dao.PacienteDAO;
 import ConsultorioMedico.dao.DoctorDAO;
@@ -8,7 +8,7 @@ import ConsultorioMedico.modelo.Paciente;
 import ConsultorioMedico.modelo.Turno;
 import ConsultorioMedico.util.Estilos;
 import ConsultorioMedico.util.Validacion;
-import ConsultorioMedico.vista.AsignarTurnoPanel;
+import ConsultorioMedico.vista.turno.AsignarTurnoPanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
@@ -37,7 +37,7 @@ public class AsignarTurnoControlador {
 
         // botón Cancelar
         vistaAsignarTurnoPanel.getBtnCancelar().addActionListener(e -> {
-            vista.mostrarPantalla("menu");
+            vista.mostrarPantalla("menuGestionarTurno");
             Estilos.limpiarTextFields(vistaAsignarTurnoPanel);
         });
 
@@ -75,6 +75,7 @@ public class AsignarTurnoControlador {
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
             LocalTime hora;
+
             try {
                 hora = LocalTime.parse(horaSeleccionada, DateTimeFormatter.ofPattern("HH:mm"));
             } catch (Exception ex) {
@@ -95,12 +96,16 @@ public class AsignarTurnoControlador {
             }
 
             // crea y guarda el turno
-            Turno nuevoTurno = new Turno(pacienteSeleccionado.getDni(), doctorSeleccionado.getId_doctor(), fechaSeleccionada, hora);
+            Turno nuevoTurno = new Turno(
+                    pacienteSeleccionado.getDni(),
+                    doctorSeleccionado.getId_doctor(),
+                    fechaSeleccionada,
+                    hora
+            );
             turnoDAO.guardarTurno(nuevoTurno);
 
             JOptionPane.showMessageDialog(null, "Turno asignado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         });
-
 
     }
 

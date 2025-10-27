@@ -1,4 +1,4 @@
-package ConsultorioMedico.vista;
+package ConsultorioMedico.vista.turno;
 
 import ConsultorioMedico.modelo.Doctor;
 import ConsultorioMedico.modelo.Paciente;
@@ -61,6 +61,7 @@ public class AsignarTurnoPanel extends JPanel {
     private void aplicarEstilos() {
         Estilos.aplicarEstiloCalendario(dateChooser);
         Estilos.aplicarEstiloTitulo(lblTitulo);
+        Estilos.aplicarEstiloBoton(btnAsignar, btnCancelar);
     }
 
     private void configurarLayout() {
