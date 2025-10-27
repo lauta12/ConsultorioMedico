@@ -116,4 +116,13 @@ public class Estilos {
         }
 
     }
+
+    public static void aplicarEstiloBoton(JButton... botones) {
+        Dimension tamano = new Dimension(180, 45);
+        for(JButton boton : botones) {
+            boton.setPreferredSize(tamano);
+            boton.setMaximumSize(tamano);
+        }
+
+    }
 }
