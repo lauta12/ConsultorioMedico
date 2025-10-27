@@ -1,7 +1,14 @@
 package ConsultorioMedico.vista;
 
-import ConsultorioMedico.util.*;
-import javax.swing.JButton;
+import ConsultorioMedico.controlador.turno.ModificarTurnoControlador;
+import ConsultorioMedico.vista.menu.MenuGestionarPacientePanel;
+import ConsultorioMedico.vista.menu.MenuGestionarTurnoPanel;
+import ConsultorioMedico.vista.menu.MenuPanel;
+import ConsultorioMedico.vista.paciente.ModificarPacientePanel;
+import ConsultorioMedico.vista.paciente.RegistrarPacientePanel;
+import ConsultorioMedico.vista.turno.AsignarTurnoPanel;
+import ConsultorioMedico.vista.turno.ModificarTurnoPanel;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -14,11 +21,13 @@ public class ConsultorioMedicoVista extends JFrame {
     // paneles
     private MenuPanel menuPanel;
     private RegistrarPacientePanel registrarPacientePanel;
-    private BuscarPacientePanel buscarPacientePanel;
+    private ModificarPacientePanel modificarPacientePanel;
     private AsignarTurnoPanel asignarTurnoPanel;
+    private MenuGestionarTurnoPanel menuGestionarTurnoPanel;
+    private MenuGestionarPacientePanel menuGestionarPacientePanel;
+    private ModificarTurnoPanel modificarTurnoPanel;
+    private ModificarTurnoControlador modificarTurnoControlador;
 
-    // guardo el boton
-    private JButton btnVolver;
 
     public ConsultorioMedicoVista() {
         super("Consultorio Medico");
@@ -30,8 +39,11 @@ public class ConsultorioMedicoVista extends JFrame {
     private void inicializarComponentes() {
         menuPanel = new MenuPanel();
         registrarPacientePanel = new RegistrarPacientePanel();
-        buscarPacientePanel = new BuscarPacientePanel();
+        menuGestionarPacientePanel = new MenuGestionarPacientePanel();
+        menuGestionarTurnoPanel = new MenuGestionarTurnoPanel();
+        modificarPacientePanel = new ModificarPacientePanel();
         asignarTurnoPanel = new AsignarTurnoPanel();
+        modificarTurnoPanel = new ModificarTurnoPanel();
     }
 
     private void configurarVentana() {
@@ -44,10 +56,14 @@ public class ConsultorioMedicoVista extends JFrame {
         cardLayout = new CardLayout();
         panelPrincipal = new JPanel(cardLayout);
 
-        panelPrincipal.add(menuPanel, "menu");
-        panelPrincipal.add(registrarPacientePanel, "registrar");
-        panelPrincipal.add(buscarPacientePanel, "buscar");
-        panelPrincipal.add(asignarTurnoPanel, "turno");
+        panelPrincipal.add(menuPanel, "menuPanel");
+        panelPrincipal.add(registrarPacientePanel, "registrarPaciente");
+        panelPrincipal.add(menuGestionarPacientePanel, "menuGestionarPaciente");
+        panelPrincipal.add(menuGestionarTurnoPanel, "menuGestionarTurno");
+        panelPrincipal.add(asignarTurnoPanel, "asignarTurno");
+        panelPrincipal.add(modificarPacientePanel, "modificarPaciente");
+        panelPrincipal.add(modificarTurnoPanel, "modificarTurno");
+
 
         this.add(panelPrincipal, BorderLayout.CENTER);
         this.setVisible(true);
@@ -55,10 +71,21 @@ public class ConsultorioMedicoVista extends JFrame {
 
     public MenuPanel getMenuPanel() { return menuPanel; }
     public RegistrarPacientePanel getRegistrarPacientePanel() { return registrarPacientePanel; }
-    public BuscarPacientePanel getBuscarPacientePanel() { return buscarPacientePanel; }
+    public ModificarPacientePanel getModificarPacientePanel() { return modificarPacientePanel; }
     public AsignarTurnoPanel getAsignarTurnoPanel() { return asignarTurnoPanel; }
+    public MenuGestionarPacientePanel getMenuGestionarPacientePanel() { return menuGestionarPacientePanel; }
+    public MenuGestionarTurnoPanel getMenuGestionarTurnoPanel() { return menuGestionarTurnoPanel; }
+    public ModificarTurnoPanel getModificarTurnoPanel() { return modificarTurnoPanel; }
+
+    // getter para el controlador
+    public ModificarTurnoControlador getModificarTurnoControlador() { return modificarTurnoControlador; }
 
     public void mostrarPantalla(String nombrePantalla) {
+        // crea el controlador solo si no existe y es la pantalla correspondiente
+        if ("modificarTurno".equals(nombrePantalla) && modificarTurnoControlador == null) {
+            modificarTurnoControlador = new ModificarTurnoControlador(this);
+        }
+
         cardLayout.show(panelPrincipal, nombrePantalla);
     }
 
