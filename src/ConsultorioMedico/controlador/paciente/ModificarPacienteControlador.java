@@ -1,34 +1,33 @@
-package ConsultorioMedico.controlador;
+package ConsultorioMedico.controlador.paciente;
 
 import ConsultorioMedico.dao.PacienteDAO;
 import ConsultorioMedico.modelo.Paciente;
 import ConsultorioMedico.util.Estilos;
 import ConsultorioMedico.util.Validacion;
-import ConsultorioMedico.vista.BuscarPacientePanel;
+import ConsultorioMedico.vista.paciente.ModificarPacientePanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
-import ConsultorioMedico.vista.RegistrarPacientePanel;
+import ConsultorioMedico.vista.paciente.RegistrarPacientePanel;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class BuscarPacienteControlador {
+public class ModificarPacienteControlador {
     private ConsultorioMedicoVista vista;
     private PacienteDAO pacienteDAO;
-    private BuscarPacientePanel panelBuscar;
+    private ModificarPacientePanel panelGestionar;
     private Validacion validador;
     private RegistrarPacientePanel panelRegistrar;
 
-    public BuscarPacienteControlador(ConsultorioMedicoVista vista) {
+    public ModificarPacienteControlador(ConsultorioMedicoVista vista) {
         this.vista = vista;
-        this.panelBuscar = vista.getBuscarPacientePanel();
+        this.panelGestionar = vista.getModificarPacientePanel();
         this.pacienteDAO = new PacienteDAO();
         this.validador = new Validacion(vista);
 
-
         // boton Buscar
-        vista.getBuscarPacientePanel().getBtnBuscar().addActionListener(e -> {
-            String dni = vista.getBuscarPacientePanel().getDni().trim();
+        vista.getModificarPacientePanel().getBtnBuscar().addActionListener(e -> {
+            String dni = vista.getModificarPacientePanel().getDni().trim();
 
             if(dni.isEmpty()) {
                 JOptionPane.showMessageDialog(vista, "Ingrese un DNI para buscar.",
@@ -36,8 +35,8 @@ public class BuscarPacienteControlador {
                 return;
             }
 
-            Paciente paciente = pacienteDAO.buscarPorDni(vista.getBuscarPacientePanel().getDni());
-            DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+            Paciente paciente = pacienteDAO.buscarPorDni(vista.getModificarPacientePanel().getDni());
+            DefaultTableModel modelo = vista.getModificarPacientePanel().getModelo();
 
             modelo.setRowCount(0);
 
@@ -56,23 +55,23 @@ public class BuscarPacienteControlador {
             }
         });
 
-        // Panel BuscarPaciente. Botón cancelar
-        vista.getBuscarPacientePanel().getBtnCancelar().addActionListener(e -> {
-            vista.mostrarPantalla("menu");
-            Estilos.limpiarTextFields(vista.getBuscarPacientePanel());
+        // Botón volver
+        vista.getModificarPacientePanel().getBtnVolver().addActionListener(e -> {
+            vista.mostrarPantalla("menuGestionarPaciente");
+            Estilos.limpiarTextFields(vista.getModificarPacientePanel());
         });
 
-        // Panel BuscarPaciente. Boton Actualizar
-        vista.getBuscarPacientePanel().getBtnActualizar().addActionListener(e -> {
-            DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+        // Boton Actualizar
+        vista.getModificarPacientePanel().getBtnActualizar().addActionListener(e -> {
+            DefaultTableModel modelo = vista.getModificarPacientePanel().getModelo();
             modelo.setRowCount(0);
             validador.cargarPacientesEnTabla();
-            Estilos.limpiarTextFields(panelBuscar);
+            Estilos.limpiarTextFields(panelGestionar);
         });
 
-        // Panel Buscar Paciente. Boton Eliminar
-        vista.getBuscarPacientePanel().getBtnEliminar().addActionListener(e -> {
-            int[] filasSeleccionadas = vista.getBuscarPacientePanel().getTablaPacientes().getSelectedRows();
+        // Boton Eliminar
+        vista.getModificarPacientePanel().getBtnEliminar().addActionListener(e -> {
+            int[] filasSeleccionadas = vista.getModificarPacientePanel().getTablaPacientes().getSelectedRows();
 
             if(filasSeleccionadas.length == 0) {
                 JOptionPane.showMessageDialog(null, "Selecciona al menos un paciente para eliminar.");
@@ -86,7 +85,7 @@ public class BuscarPacienteControlador {
                     JOptionPane.YES_NO_OPTION);
 
             if(confirm == JOptionPane.YES_OPTION) {
-                DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+                DefaultTableModel modelo = vista.getModificarPacientePanel().getModelo();
 
                 for(int i = filasSeleccionadas.length - 1; i >=0; i--) {
                     String dni = (String) modelo.getValueAt(filasSeleccionadas[i], 0);
@@ -96,18 +95,20 @@ public class BuscarPacienteControlador {
                 JOptionPane.showMessageDialog(null, "Paciente(s) eliminado(s) correctamente.");
                 validador.cargarPacientesEnTabla();
             }
+
+            Estilos.limpiarTextFields(vista.getModificarPacientePanel());
         });
 
 
-        //botón Editar
-        vista.getBuscarPacientePanel().getBtnEditar().addActionListener(e -> {
-            int filaSeleccionada = vista.getBuscarPacientePanel().getTablaPacientes().getSelectedRow();
+        // botón Editar
+        vista.getModificarPacientePanel().getBtnEditar().addActionListener(e -> {
+            int filaSeleccionada = vista.getModificarPacientePanel().getTablaPacientes().getSelectedRow();
             if (filaSeleccionada == -1) {
-                JOptionPane.showMessageDialog(panelBuscar, "Seleccione un paciente para editar.");
+                JOptionPane.showMessageDialog(panelGestionar, "Seleccione un paciente para editar.");
                 return;
             }
 
-            DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+            DefaultTableModel modelo = vista.getModificarPacientePanel().getModelo();
 
             String dni = (String) modelo.getValueAt(filaSeleccionada, 0);
             String nombre = (String) modelo.getValueAt(filaSeleccionada, 1);
@@ -127,7 +128,7 @@ public class BuscarPacienteControlador {
             };
 
             int opcion = JOptionPane.showConfirmDialog(
-                    panelBuscar,
+                    panelGestionar,
                     campos,
                     "Editar paciente",
                     JOptionPane.OK_CANCEL_OPTION
@@ -138,7 +139,7 @@ public class BuscarPacienteControlador {
                 String nuevoApellido = txtApellido.getText();
                 String nuevoTelefono = txtTelefono.getText();
 
-                if(!validador.validarDatosBasicos(nuevoNombre, nuevoApellido, nuevoTelefono, panelBuscar)) {
+                if(!validador.validarDatosBasicos(nuevoNombre, nuevoApellido, nuevoTelefono, panelGestionar)) {
                     return;
                 }
 
@@ -150,7 +151,7 @@ public class BuscarPacienteControlador {
                 // llama al controlador para actualizar el paciente en la base de datos
                 pacienteDAO.modificarDatosPaciente(dni, txtNombre.getText(), txtApellido.getText(), txtTelefono.getText());
 
-                JOptionPane.showMessageDialog(panelBuscar, "Se ha modificado correctamente");
+                JOptionPane.showMessageDialog(panelGestionar, "Se ha modificado correctamente");
             }
         });
 

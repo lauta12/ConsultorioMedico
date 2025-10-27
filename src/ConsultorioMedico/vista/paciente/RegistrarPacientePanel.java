@@ -1,4 +1,4 @@
-package ConsultorioMedico.vista;
+package ConsultorioMedico.vista.paciente;
 
 import ConsultorioMedico.util.Estilos;
 import javax.swing.JPanel;
@@ -108,7 +108,5 @@ public class RegistrarPacientePanel extends JPanel {
     // setters
     public void setNombre(String nombre) { txtNombre.setText(nombre); }
     public void setApellido(String apellido) { txtApellido.setText(apellido); }
-    public void setDni(String dni) { txtDni.setText(dni); }
-    public void setTelefono(String telefono) { txtTelefono.setText(telefono); }
 
 }

@@ -1,4 +1,4 @@
-package ConsultorioMedico.vista;
+package ConsultorioMedico.vista.paciente;
 
 //import ConsultorioMedico.util.Estilos;
 import javax.swing.*;
@@ -6,17 +6,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-public class BuscarPacientePanel extends JPanel {
+public class ModificarPacientePanel extends JPanel {
     private JTable tablaPacientes;
     private DefaultTableModel modelo;
     private JScrollPane scroll;
-    private JButton btnEliminar, btnCancelar, btnBuscar, btnActualizar;
+    private JButton btnEliminar, btnVolver, btnBuscar, btnActualizar, btnEditar;
     private JLabel lblDni;
     private JTextField txtDni;
     private String[] columnas;
     private JPanel panelSuperior;
 
-    public BuscarPacientePanel() {
+    public ModificarPacientePanel() {
         inicializarComponentes();
         configurarLayout();
     }
@@ -28,7 +28,8 @@ public class BuscarPacientePanel extends JPanel {
         btnBuscar = new JButton("Buscar");
         btnActualizar = new JButton("Actualizar");
         btnEliminar = new JButton("Eliminar");
-        btnCancelar = new JButton("Cancelar");
+        btnEditar = new JButton("Editar");
+        btnVolver = new JButton("Volver");
 
         columnas = new String[]{"DNI", "Nombre", "Apellido", "Teléfono", "Obra Social"};
         modelo = new DefaultTableModel(columnas, 0);
@@ -47,8 +48,9 @@ public class BuscarPacientePanel extends JPanel {
         panelSuperior.add(txtDni);
         panelSuperior.add(btnBuscar);
         panelSuperior.add(btnActualizar);
+        panelSuperior.add(btnEditar);
         panelSuperior.add(btnEliminar);
-        panelSuperior.add(btnCancelar);
+        panelSuperior.add(btnVolver);
 
         add(panelSuperior, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
@@ -57,16 +59,14 @@ public class BuscarPacientePanel extends JPanel {
 
     // getters
     public JButton getBtnBuscar() { return btnBuscar; }
-    public JButton getBtnCancelar() { return btnCancelar; }
+    public JButton getBtnVolver() { return btnVolver; }
     public JButton getBtnActualizar() { return btnActualizar; }
     public JButton getBtnEliminar() { return btnEliminar; }
+    public JButton getBtnEditar() { return btnEditar; }
     public JTable getTablaPacientes() { return tablaPacientes; }
 
 
     public JTextField getTxtDni() { return txtDni; }
     public String getDni() { return txtDni.getText(); }
     public DefaultTableModel getModelo() { return modelo; }
-    // setters
-
-
 }
