@@ -3,7 +3,7 @@ package ConsultorioMedico.util;
 import ConsultorioMedico.dao.PacienteDAO;
 import ConsultorioMedico.modelo.Doctor;
 import ConsultorioMedico.modelo.Paciente;
-import ConsultorioMedico.vista.RegistrarPacientePanel;
+import ConsultorioMedico.vista.paciente.RegistrarPacientePanel;
 import ConsultorioMedico.vista.ConsultorioMedicoVista;
 
 import javax.swing.*;
@@ -21,25 +21,25 @@ public class Validacion {
         this.dao = new PacienteDAO();
     }
 
-    public boolean validarDatos(RegistrarPacientePanel panel) {
+    public boolean validarDatos(RegistrarPacientePanel panelRegistrar) {
         boolean valido = true;
 
-        String nombre = panel.getTxtNombre().getText();
-        String apellido = panel.getTxtApellido().getText();
-        String dni = panel.getTxtDni().getText();
-        String telefono = panel.getTxtTelefono().getText();
-        String obraSocial = panel.getObraSocialSeleccionada();
+        String nombre = panelRegistrar.getTxtNombre().getText();
+        String apellido = panelRegistrar.getTxtApellido().getText();
+        String dni = panelRegistrar.getTxtDni().getText();
+        String telefono = panelRegistrar.getTxtTelefono().getText();
+        String obraSocial = panelRegistrar.getObraSocialSeleccionada();
 
         if (nombre.trim().isEmpty() || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
             valido = false;
         } else {
-            panel.setNombre(capitalizarNombre(nombre));
+            panelRegistrar.setNombre(capitalizarNombre(nombre));
         }
 
         if (apellido.trim().isEmpty() || !apellido.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
             valido = false;
         } else {
-            panel.setApellido(capitalizarNombre(apellido));
+            panelRegistrar.setApellido(capitalizarNombre(apellido));
         }
 
         if(dni.trim().isEmpty() || !dni.trim().matches("\\d{8}")) {
@@ -57,7 +57,28 @@ public class Validacion {
         return valido;
     }
 
-    public static String capitalizarNombre(String texto) {
+    public boolean validarDatosBasicos(String nombre, String apellido, String telefono, Component parent) {
+        if (nombre.trim().isEmpty() || !nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
+            JOptionPane.showMessageDialog(parent, "El nombre no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (apellido.trim().isEmpty() || !apellido.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")) {
+            JOptionPane.showMessageDialog(parent, "El apellido no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (telefono.trim().isEmpty() || !telefono.matches("\\d+") || telefono.length() < 8) {
+            JOptionPane.showMessageDialog(parent, "El teléfono no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    public String capitalizarNombre(String texto) {
         if (texto == null || texto.trim().isEmpty()) {
             return "";
         }
@@ -80,7 +101,7 @@ public class Validacion {
     }
 
     public void cargarPacientesEnTabla() {
-        DefaultTableModel modelo = vista.getBuscarPacientePanel().getModelo();
+        DefaultTableModel modelo = vista.getModificarPacientePanel().getModelo();
         modelo.setRowCount(0);
 
         for (Paciente p : dao.listarTodos()) {
