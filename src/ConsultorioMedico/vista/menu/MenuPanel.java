@@ -13,7 +13,6 @@ public class MenuPanel extends JPanel {
     private JButton btnGestionarTurno;
 
     private JLabel lblTitulo;
-    private JLabel lblVersion;
 
     public MenuPanel() {
         inicializarComponentes();
@@ -26,8 +25,6 @@ public class MenuPanel extends JPanel {
 
         btnGestionarPaciente = new JButton("Gestionar Paciente");
         btnGestionarTurno = new JButton("Gestionar Turno");
-
-        lblVersion = new JLabel("Versión 3.0.1");
     }
 
     private void configurarLayout() {
@@ -39,7 +36,6 @@ public class MenuPanel extends JPanel {
 
         add(lblTitulo, BorderLayout.NORTH);
         add(panelBotones, BorderLayout.CENTER);
-        add(lblVersion, BorderLayout.SOUTH);
 
         Estilos.aplicarEstiloTitulo(lblTitulo);
         Estilos.aplicarEstiloBoton(btnGestionarPaciente, btnGestionarTurno);
@@ -48,5 +44,4 @@ public class MenuPanel extends JPanel {
     // getters
     public JButton getBtnGestionarPaciente() { return btnGestionarPaciente; }
     public JButton getBtnGestionarTurno() { return btnGestionarTurno; }
-
 }
