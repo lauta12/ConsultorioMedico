@@ -27,10 +27,9 @@ public class TurnoDAO {
             stmt.setInt(2, turno.getIdDoctor());
             stmt.setDate(3, Date.valueOf(turno.getFecha()));
             stmt.setTime(4, Time.valueOf(turno.getHora()));
-            stmt.setString(5, turno.getEstado());
+            //stmt.setString(5, turno.getEstado());
 
             stmt.executeUpdate();
-
             return true;
 
         } catch(SQLException e) {
