@@ -14,7 +14,7 @@ import java.awt.Insets;
 public class RegistrarPacientePanel extends JPanel {
     private JLabel lblTitulo, lblNombre, lblApellido, lblDni, lblObraSocial, lblTelefono;
     private JTextField txtNombre, txtApellido, txtDni, txtTelefono;
-    private JButton btnGuardar, btnCancelar;
+    private JButton btnGuardar, btnVolver;
 
     String[] opciones = {"Seleccionar obra social", "No Tiene", "OSDE", "Swiss Medical", "Galeno", "Medicus", "Omint",
             "Sancor Salud", "Federada Salud", "Prevencion Salud" };
@@ -46,7 +46,7 @@ public class RegistrarPacientePanel extends JPanel {
         txtTelefono = new JTextField(12);
 
         btnGuardar = new JButton("Guardar");
-        btnCancelar = new JButton("Cancelar");
+        btnVolver = new JButton("Volver");
     }
 
     private void aplicarEstilos() {
@@ -87,12 +87,12 @@ public class RegistrarPacientePanel extends JPanel {
         gbc.gridx = 1; add(txtTelefono, gbc);
 
         gbc.gridx = 0; gbc.gridy = 6; add(btnGuardar, gbc);
-        gbc.gridx = 1; add(btnCancelar, gbc);
+        gbc.gridx = 1; add(btnVolver, gbc);
     }
 
     // getters
     public JButton getBtnGuardar() { return btnGuardar; }
-    public JButton getBtnCancelar() { return btnCancelar; }
+    public JButton getBtnVolver() { return btnVolver; }
     public JTextField getTxtNombre() { return txtNombre; }
     public JTextField getTxtApellido() { return txtApellido; }
     public JTextField getTxtDni() { return txtDni; }

@@ -52,7 +52,7 @@ public class RegistrarPacienteControlador {
         });
 
         // Botón cancelar
-        vista.getRegistrarPacientePanel().getBtnCancelar().addActionListener(e -> {
+        vista.getRegistrarPacientePanel().getBtnVolver().addActionListener(e -> {
             vista.mostrarPantalla("menuGestionarPaciente");
             Estilos.limpiarTextFields(panelRegistrar);
             panelRegistrar.getComboObraSocial().setSelectedIndex(0);
