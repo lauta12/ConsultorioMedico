@@ -44,6 +44,7 @@ public class ModificarTurnoPanel extends JPanel {
     private void configurarLayout() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
+        //TODO: hacer un filtro por paciente.
 
         // Panel superior con filtros y botones
         JPanel panelSuperior = new JPanel(new GridBagLayout());
