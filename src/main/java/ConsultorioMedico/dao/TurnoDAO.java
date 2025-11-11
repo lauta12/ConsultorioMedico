@@ -63,7 +63,7 @@ public class TurnoDAO {
     public List<Turno> listarTodos() {
         List<Turno> lista = new ArrayList<>();
 
-        String sql = "SELECT t.id_turno, t.fecha, t.hora, t.estado, p.nombre AS nombre_paciente, d.nombre AS nombre_doctor " +
+        String sql = "SELECT t.id_turno, t.fecha, t.hora, t.estado, p.nombre AS nombrePaciente, d.nombre AS nombreDoctor " +
                 "FROM turnos t " +
                 "JOIN pacientes p ON t.dni_paciente = p.dni " +
                 "JOIN doctores d ON t.id_doctor = d.id_doctor";
@@ -75,8 +75,8 @@ public class TurnoDAO {
             while (rs.next()) {
                 Turno turno = new Turno();
                 turno.setIdTurno(rs.getInt("id_turno"));
-                turno.setNombrePaciente(rs.getString("nombre_paciente"));
-                turno.setNombreDoctor(rs.getString("nombre_doctor"));
+                turno.setNombrePaciente(rs.getString("nombrePaciente"));
+                turno.setNombreDoctor(rs.getString("nombreDoctor"));
                 turno.setFecha(rs.getDate("fecha").toLocalDate());
                 turno.setHora(rs.getTime("hora").toLocalTime());
                 turno.setEstado(rs.getString("estado"));
@@ -110,12 +110,12 @@ public class TurnoDAO {
         List<Turno> lista = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
                 "SELECT t.id_turno, t.fecha, t.hora, t.estado, " +
-                        "CONCAT(p.nombre, ' ', p.apellido) AS nombre_paciente, " +
-                        "d.nombre AS nombre_doctor " +
+                        "CONCAT(p.nombre, ' ', p.apellido) AS nombrePaciente, " +
+                        "d.nombre AS nombreDoctor " +
                         "FROM turnos t " +
                         "JOIN pacientes p ON t.dni_paciente = p.dni " +
                         "JOIN doctores d ON t.id_doctor = d.id_doctor " +
-                        "WHERE 1=1"  // Condición base para agregar filtros dinámicamente
+                        "WHERE 1=1"
         );
 
         // Agrega condiciones solo si los parámetros no son null
@@ -148,8 +148,8 @@ public class TurnoDAO {
             while (rs.next()) {
                 Turno turno = new Turno();
                 turno.setIdTurno(rs.getInt("id_turno"));
-                turno.setNombrePaciente(rs.getString("nombre_paciente"));
-                turno.setNombreDoctor(rs.getString("nombre_doctor"));
+                turno.setNombrePaciente(rs.getString("nombrePaciente"));
+                turno.setNombreDoctor(rs.getString("nombreDoctor"));
                 turno.setFecha(rs.getDate("fecha").toLocalDate());
                 turno.setHora(rs.getTime("hora").toLocalTime());
                 turno.setEstado(rs.getString("estado"));
