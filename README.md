@@ -38,7 +38,7 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/lauta12/ConsultorioMedico.git]
+    git clone https://github.com/lauta12/ConsultorioMedico.git
     cd ConsultorioMedico
     ```
 
