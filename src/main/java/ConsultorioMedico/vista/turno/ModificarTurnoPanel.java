@@ -15,6 +15,7 @@ public class ModificarTurnoPanel extends JPanel {
     private JButton btnEliminar;
     private JButton btnMarcarCompletado;
     private JButton btnMarcarCancelado;
+    private JButton btnMarcarPendiente;
     private JLabel lblBusqueda;
     private JLabel lblEstado;
     private JComboBox comboEstado;
@@ -38,55 +39,83 @@ public class ModificarTurnoPanel extends JPanel {
         btnEliminar = new JButton("Eliminar turno");
         btnMarcarCompletado = new JButton("Marcar turno completado");
         btnMarcarCancelado = new JButton("Marcar turno cancelado");
+        btnMarcarPendiente = new JButton("Marcar turno pendiente");
         btnVolver = new JButton("Volver");
     }
 
     private void configurarLayout() {
-        setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
-        //TODO: hacer un filtro por paciente.
+        // --- 1. Panel Principal (este panel) ---
+        // Usamos BorderLayout y le damos un margen general
+        setLayout(new BorderLayout(0, 10)); // 10px de espacio entre el norte y el centro
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // 10px de margen en todos los lados
 
-        // Panel superior con filtros y botones
-        JPanel panelSuperior = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5,5,5,5);
-        gbc.anchor = GridBagConstraints.WEST;
 
-        // fila 1 labels y fecha
-        gbc.gridx = 0; gbc.gridy = 0;
-        panelSuperior.add(lblBusqueda, gbc);
-        gbc.gridx = 1;
-        panelSuperior.add(txtBusqueda, gbc);
+        // --- 2. Panel Superior (para filtros y botones) ---
+        // Este panel usará BorderLayout para separar filtros (Oeste) y botones (Este)
+        JPanel panelSuperior = new JPanel(new BorderLayout(20, 0)); // 20px de espacio entre ellos
+        add(panelSuperior, BorderLayout.NORTH); // Lo ponemos arriba
 
-        // label y el comboBox del estado
-        gbc.gridx = 0; gbc.gridy = 1;
-        panelSuperior.add(lblEstado, gbc);
-        gbc.gridx = 1;
-        panelSuperior.add(comboEstado, gbc);
 
-        // fila 2, botones de busqueda y boton limpiar
-        gbc.gridy = 0;
-        gbc.gridx = 3;
-        panelSuperior.add(btnBuscar, gbc);
-        gbc.gridx = 4;
-        panelSuperior.add(btnLimpiar, gbc);
-        gbc.gridx = 5;
-        panelSuperior.add(btnEliminar, gbc);
-        gbc.gridx = 6;
-        panelSuperior.add(btnMarcarCompletado, gbc);
-        gbc.gridx = 7;
-        panelSuperior.add(btnMarcarCancelado, gbc);
-        gbc.gridx = 8;
-        panelSuperior.add(btnVolver, gbc);
+        // --- 3. Panel de Filtros (Izquierda) ---
+        // Usamos GridBagLayout para alinear etiquetas y campos
+        JPanel panelFiltros = new JPanel(new GridBagLayout());
+        GridBagConstraints gbcFiltros = new GridBagConstraints();
+        gbcFiltros.insets = new Insets(5, 5, 5, 5); // Un pequeño margen interno
+        gbcFiltros.anchor = GridBagConstraints.WEST; // Alinea todo a la izquierda
 
-        add(panelSuperior, BorderLayout.NORTH);
+        // Fila 0: Filtro Fecha
+        gbcFiltros.gridx = 0; gbcFiltros.gridy = 0;
+        panelFiltros.add(lblBusqueda, gbcFiltros);
 
-        // Tabla
+        gbcFiltros.gridx = 1; gbcFiltros.gridy = 0;
+        gbcFiltros.fill = GridBagConstraints.HORIZONTAL; // Estira el campo de texto
+        panelFiltros.add(txtBusqueda, gbcFiltros);
+
+        // Fila 1: Filtro Estado
+        gbcFiltros.gridx = 0; gbcFiltros.gridy = 1;
+        gbcFiltros.fill = GridBagConstraints.NONE; // Reseteamos el estiramiento
+        panelFiltros.add(lblEstado, gbcFiltros);
+
+        gbcFiltros.gridx = 1; gbcFiltros.gridy = 1;
+        gbcFiltros.fill = GridBagConstraints.HORIZONTAL; // Estira el combo
+        panelFiltros.add(comboEstado, gbcFiltros);
+
+        // Agregamos los filtros al lado OESTE (izquierda) del panel superior
+        panelSuperior.add(panelFiltros, BorderLayout.WEST);
+
+
+        // --- 4. Panel de Botones (Derecha) ---
+        // ¡La clave! Una grilla de 2 filas x 4 columnas.
+        // Esto fuerza a TODOS los botones a tener el mismo tamaño y alinearse perfecto.
+        JPanel panelBotones = new JPanel(new GridLayout(2, 4, 5, 5)); // 2 filas, 4 cols, 5px de espacio
+
+        // Fila 1 de botones
+        panelBotones.add(btnBuscar);
+        panelBotones.add(btnLimpiar);
+        panelBotones.add(btnEliminar);
+        panelBotones.add(btnVolver);
+
+        // Fila 2 de botones
+        panelBotones.add(btnMarcarCompletado);
+        panelBotones.add(btnMarcarCancelado);
+        panelBotones.add(btnMarcarPendiente);
+
+        // ¡Truco! Agregamos un panel vacío para rellenar el último
+        // espacio de la grilla (2da fila, 4ta columna) y que todo quede alineado.
+        panelBotones.add(new JPanel());
+
+        // Agregamos los botones al lado ESTE (derecha) del panel superior
+        panelSuperior.add(panelBotones, BorderLayout.EAST);
+
+
+        // --- 5. Tabla (Centro) ---
+        // Tu código de la tabla ya estaba perfecto.
         modeloTabla = new DefaultTableModel(columnas, 0);
         tablaTurnos = new JTable(modeloTabla);
         JScrollPane scroll = new JScrollPane(tablaTurnos);
-        add(scroll, BorderLayout.CENTER);
+        add(scroll, BorderLayout.CENTER); // Lo ponemos en el centro
     }
+
 
     // Getters para el controlador
     public JTable getTablaTurnos() { return tablaTurnos; }
@@ -96,6 +125,7 @@ public class ModificarTurnoPanel extends JPanel {
     public JButton getBtnVolver() { return btnVolver; }
     public JButton getBtnMarcarCancelado() { return btnMarcarCancelado; }
     public JButton getBtnMarcarCompletado() { return btnMarcarCompletado; }
+    public JButton getBtnMarcarPendiente() { return btnMarcarPendiente; }
     public JButton getBtnEliminar() { return btnEliminar; }
     public JButton getBtnLimpiar() { return btnLimpiar; }
     public JComboBox getComboEstado() { return comboEstado; }

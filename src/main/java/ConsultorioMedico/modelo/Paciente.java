@@ -13,7 +13,7 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "nombre" + " apellido" + " dni";
+        return this.nombre + " " + this.apellido + " - " + this.dni;
     }
 
     // getters y setters

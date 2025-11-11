@@ -97,6 +97,10 @@ public class ModificarTurnoControlador {
             actualizarEstadoTurno("Cancelado");
         });
 
+        vista.getModificarTurnoPanel().getBtnMarcarPendiente().addActionListener(e -> {
+            actualizarEstadoTurno("Pendiente");
+        });
+
     }
 
     private void actualizarEstadoTurno(String nuevoEstado) {
