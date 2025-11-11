@@ -36,9 +36,31 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 ## 🚀 Cómo Ejecutar
 
-1.  Clonar el repositorio: `git clone https://github.com/lauta12/ConsultorioMedico`.
-2.  Importar el proyecto en Cualquier IDE: IntelliJ IDEA, Eclipse, VSCode, etc.
-3.  Abrir MySQLWorkbench y crear la base de datos usando el archivo `database.sql` en la raíz del proyecto: `ConsultorioMedico/database.sql`.
-4.  (Opcional) Cargar datos a la base de datos usando el archivo `mock_data.sql` en la raíz del proyecto: `ConsultorioMedico/mock_data.sql`.
-5.  Configurar la conexión a la base de datos en `src/main/java/ConsultorioMedico/util/Conexion.java`.
-6.  Ejecutar la clase principal `Main.java` en `src/main/java/Main.java`.
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone [https://github.com/lauta12/ConsultorioMedico.git](https://github.com/lauta12/ConsultorioMedico.git)
+    cd ConsultorioMedico
+    ```
+
+2.  **Importar el proyecto:**
+    * Abre tu IDE preferido (IntelliJ IDEA, Eclipse, VSCode, etc.).
+
+3.  **Crear la Base de Datos:**
+    * Abre MySQL Workbench.
+    * Ejecuta el script `database.sql` (que está en la raíz del proyecto) para crear las tablas.
+
+4.  **(Opcional) Cargar Datos:**
+    * Para tener datos de prueba, ejecuta el script `mock_data.sql`.
+
+5.  **Configurar la Conexión:**
+    * Abre el archivo de configuración y pon tu usuario y contraseña de MySQL.
+    
+    ```java
+    // Ruta: src/main/java/ConsultorioMedico/util/Conexion.java
+    
+    private static final String USUARIO = "root";
+    private static final String PASSWORD = "tu_contraseña_de_mysql";
+    ```
+
+6.  **Ejecutar:**
+    * Busca y ejecuta la clase principal: `src/main/java/Main.java`.
