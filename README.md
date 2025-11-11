@@ -65,3 +65,7 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 6.  **Ejecutar:**
     * Ejecutá la clase principal: `src/main/java/Main.java`.
+
+--- 
+
+TODO: Agregar Roles de administrador y de empleado. Si sos administrador podés acceder a ciertos lugares que un empleado no podría.
