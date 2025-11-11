@@ -27,16 +27,18 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 ## 🛠️ Tecnologías Utilizadas
 
 * **Lenguaje:** Java
-* **Interfaz Gráfica:** [Swing]
-* **Base de Datos:** [MySQL Workbench]
+* **Interfaz Gráfica:** Swing
+* **Base de Datos:** MySQL
 * **Conexión:** JDBC
-* **Gestión de Dependencias:** [Maven]
+* **Gestión de Dependencias:** Maven
 
 ---
 
 ## 🚀 Cómo Ejecutar
 
 1.  Clonar el repositorio: `git clone https://github.com/lauta12/ConsultorioMedico`
-2.  Importar el proyecto en [IntelliJ IDEA, Eclipse, VSCode, etc].
-3.  Configurar la conexión a la base de datos en `[src/main/java/ConsultorioMedico/util/Conexion.java]`.
-4.  Ejecutar la clase principal `Main.java`.
+2.  Importar el proyecto en Cualquier IDE: IntelliJ IDEA, Eclipse, VSCode, etc.
+3.  Abrir MySQLWorkbench y crear la base de datos usando el archivo [`database.sql`] en la raíz del proyecto: `[ConsultorioMedico/database.sql]`.
+4.  (Opcional) Cargar datos a la base de datos usando el archivo `[mock_data.sql]` en la raíz del proyecto: `[ConsultorioMedico/mock_data.sql]`.
+5.  Configurar la conexión a la base de datos en `[src/main/java/ConsultorioMedico/util/Conexion.java]`.
+6.  Ejecutar la clase principal `Main.java` en `[src/main/java/Main.java]`.
