@@ -20,7 +20,7 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 * **Gestión de Turnos:** Creación y asignación de turnos.
 * **Patrón de Diseño MVC:** La arquitectura del proyecto separa claramente la lógica de negocio (Modelo), la interfaz de usuario (Vista) y el manejo de entradas (Controlador).
 * **Persistencia con JDBC Puro:** En lugar de depender de un ORM, el proyecto maneja la conexión y las consultas a la base de datos directamente con JDBC. Esto asegura un entendimiento profundo de la capa de persistencia en Java.
-* **Principios de Diseño:** Se aplicaron principios de diseño como la [Menciona uno que uses, ej: "Separación de responsabilidades (SRP)"] para mantener un código limpio y mantenible.
+* **Principios de Diseño:** Se aplicaron principios de diseño como la ["Separación de responsabilidades (SRP)", "Modelo DAO (Data Access Object"] para mantener un código limpio y mantenible.
 
 ---
 
