@@ -43,17 +43,17 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
     ```
 
 2.  **Importar el proyecto:**
-    * Abre tu IDE preferido (IntelliJ IDEA, Eclipse, VSCode, etc.).
+    * Abrí tu IDE preferido (IntelliJ IDEA, Eclipse, VSCode, etc.).
 
 3.  **Crear la Base de Datos:**
-    * Abre MySQL Workbench.
-    * Ejecuta el script `database.sql` (que está en la raíz del proyecto) para crear las tablas.
+    * Abrí MySQL Workbench.
+    * Ejecutá el script `database.sql` (que está en la raíz del proyecto) para crear las tablas.
 
 4.  **(Opcional) Cargar Datos:**
-    * Para tener datos de prueba, ejecuta el script `mock_data.sql`.
+    * Para tener datos de prueba, ejecutá el script `mock_data.sql`.
 
 5.  **Configurar la Conexión:**
-    * Abre el archivo de configuración y pon tu usuario y contraseña de MySQL.
+    * Abrí el archivo de configuración y pon tu usuario y contraseña de MySQL.
     
     ```java
     // Ruta: src/main/java/ConsultorioMedico/util/Conexion.java
@@ -63,4 +63,4 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
     ```
 
 6.  **Ejecutar:**
-    * Busca y ejecuta la clase principal: `src/main/java/Main.java`.
+    * Buscá y ejecutá la clase principal: `src/main/java/Main.java`.
