@@ -4,7 +4,8 @@ Sistema de escritorio para la gestión de pacientes y turnos de un consultorio m
 
   <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/d566d764-52a8-4f26-a726-72c3e03ece68" />
   <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/9c9d3540-bf07-48c8-87b7-c0acd39b763e" />
-  <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/bc81d92e-c761-47f8-88a2-b52f920c5ee1" />
+  <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/cf3122b5-1672-4fba-8473-f0c2f15ee428" />
+
 
 ---
 
