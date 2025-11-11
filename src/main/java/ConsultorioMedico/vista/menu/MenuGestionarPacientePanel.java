@@ -63,7 +63,7 @@ public class MenuGestionarPacientePanel extends JPanel {
     }
 
     // getters y setters
-    public JButton getBtnRegistarPaciente() { return btnRegistarPaciente; }
+    public JButton getBtnRegistrarPaciente() { return btnRegistarPaciente; }
     public JButton getBtnModificarPaciente() { return btnModificarPaciente; }
     public JButton getBtnVolver() { return btnVolver; }
 

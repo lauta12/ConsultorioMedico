@@ -14,7 +14,7 @@ public class MenuGestionarPacienteControlador {
         this.validador = new Validacion(vista);
 
         // botón registrar paciente.
-        vista.getMenuGestionarPacientePanel().getBtnRegistarPaciente().addActionListener(e -> {
+        vista.getMenuGestionarPacientePanel().getBtnRegistrarPaciente().addActionListener(e -> {
             vista.mostrarPantalla("registrarPaciente");
         });
 
