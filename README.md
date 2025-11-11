@@ -1,20 +1,19 @@
-# Gestión de Consultorio Médico (Java)
+# 🏥 Gestión de Consultorio Médico (Java)
 
-Sistema de escritorio para la gestión de pacientes y turnos de un consultorio médico, desarrollado en java en Java.
+Sistema de escritorio para la gestión de pacientes y turnos de un consultorio médico, desarrollado en Java.
 
   <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/d566d764-52a8-4f26-a726-72c3e03ece68" />
   <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/9c9d3540-bf07-48c8-87b7-c0acd39b763e" />
   <img width="1352" height="761" alt="image" src="https://github.com/user-attachments/assets/bc81d92e-c761-47f8-88a2-b52f920c5ee1" />
 
-
 ---
 
-## Objetivo del Proyecto
+## 🎯 Objetivo del Proyecto
 
 El objetivo principal es construir una aplicación de escritorio funcional aplicando el patrón de diseño **Modelo-Vista-Controlador (MVC)**.
 ---
 
-## Características Principales
+## 💡 Características Principales
 
 * **Gestión de Pacientes:** Funcionalidad CRUD (Crear, Leer, Actualizar, Borrar) completa para pacientes.
 * **Gestión de Turnos:** Creación y asignación de turnos.
@@ -24,7 +23,7 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 ---
 
-## Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
 * **Lenguaje:** Java
 * **Interfaz Gráfica:** [Swing]
@@ -34,9 +33,9 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 ---
 
-## Cómo Ejecutar
+## 🚀 Cómo Ejecutar
 
 1.  Clonar el repositorio: `git clone https://github.com/lauta12/ConsultorioMedico`
-2.  Importar el proyecto en [Tu IDE, ej: IntelliJ IDEA o Eclipse].
+2.  Importar el proyecto en [IntelliJ IDEA, Eclipse, VSCode, etc].
 3.  Configurar la conexión a la base de datos en `[src/main/java/ConsultorioMedico/util/Conexion.java]`.
 4.  Ejecutar la clase principal `Main.java`.
