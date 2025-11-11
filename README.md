@@ -18,9 +18,9 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 * **Gestión de Pacientes:** Funcionalidad CRUD (Crear, Leer, Actualizar, Borrar) completa para pacientes.
 * **Gestión de Turnos:** Creación y asignación de turnos.
-* **Patrón de Diseño MVC:** La arquitectura del proyecto separa claramente la lógica de negocio (Modelo), la interfaz de usuario (Vista) y el manejo de entradas (Controlador).
-* **Persistencia con JDBC Puro:** En lugar de depender de un ORM, el proyecto maneja la conexión y las consultas a la base de datos directamente con JDBC. Esto asegura un entendimiento profundo de la capa de persistencia en Java.
-* **Principios de Diseño:** Se aplicaron principios de diseño como la [Separación de responsabilidades (SRP) y DAO (Data Access Object] para mantener un código limpio y mantenible.
+* **Patrón de Diseño MVC:** La arquitectura del proyecto separa la lógica de negocio (Modelo), la interfaz de usuario (Vista) y el manejo de entradas (Controlador).
+* **Persistencia con JDBC:** En lugar de depender de un ORM, el proyecto maneja la conexión y las consultas a la base de datos directamente con JDBC.
+* **Principios de Diseño:** Se aplicaron principios de diseño como la Separación de responsabilidades (SRP) y DAO (Data Access Object para mantener un código limpio y mantenible.
 
 ---
 
@@ -36,9 +36,9 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
 
 ## 🚀 Cómo Ejecutar
 
-1.  Clonar el repositorio: `git clone https://github.com/lauta12/ConsultorioMedico`
+1.  Clonar el repositorio: `git clone https://github.com/lauta12/ConsultorioMedico`.
 2.  Importar el proyecto en Cualquier IDE: IntelliJ IDEA, Eclipse, VSCode, etc.
-3.  Abrir MySQLWorkbench y crear la base de datos usando el archivo [`database.sql`] en la raíz del proyecto: `[ConsultorioMedico/database.sql]`.
-4.  (Opcional) Cargar datos a la base de datos usando el archivo `[mock_data.sql]` en la raíz del proyecto: `[ConsultorioMedico/mock_data.sql]`.
-5.  Configurar la conexión a la base de datos en `[src/main/java/ConsultorioMedico/util/Conexion.java]`.
-6.  Ejecutar la clase principal `Main.java` en `[src/main/java/Main.java]`.
+3.  Abrir MySQLWorkbench y crear la base de datos usando el archivo `database.sql` en la raíz del proyecto: `ConsultorioMedico/database.sql`.
+4.  (Opcional) Cargar datos a la base de datos usando el archivo `mock_data.sql` en la raíz del proyecto: `ConsultorioMedico/mock_data.sql`.
+5.  Configurar la conexión a la base de datos en `src/main/java/ConsultorioMedico/util/Conexion.java`.
+6.  Ejecutar la clase principal `Main.java` en `src/main/java/Main.java`.
