@@ -11,7 +11,6 @@ CREATE TABLE doctores (
     email VARCHAR(100)
 );
 
-
 DROP TABLE IF EXISTS pacientes;
 CREATE TABLE pacientes (
     dni VARCHAR(20) PRIMARY KEY,
@@ -29,7 +28,6 @@ CREATE TABLE turnos (
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL DEFAULT 'Pendiente',
-
 
     CONSTRAINT fk_turno_paciente
         FOREIGN KEY (dni_paciente) REFERENCES pacientes(dni),
