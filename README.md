@@ -43,17 +43,18 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
     ```
 
 2.  **Importar el proyecto:**
-    * Abrí tu IDE preferido (IntelliJ IDEA, Eclipse, VSCode, etc.).
-
+    * Abrí tu IDE (IntelliJ IDEA, Eclipse, VSCode, etc.).
+    * El IDE va a detectar el `pom.xml` y va a descargar las dependencias de Maven.
+    
 3.  **Crear la Base de Datos:**
     * Abrí MySQL Workbench.
-    * Ejecutá el script `database.sql` (que está en la raíz del proyecto) para crear las tablas.
+    * Para crear las tablas ejecutá el script `database.sql` que se encuentra en la raíz del proyecto. 
 
 4.  **(Opcional) Cargar Datos:**
-    * Para tener datos de prueba, ejecutá el script `mock_data.sql`.
+    * Para insertar datos de prueba, ejecutá el script `mock_data.sql` que se encuentra en la raíz del proyecto.
 
 5.  **Configurar la Conexión:**
-    * Abrí el archivo de configuración y pon tu usuario y contraseña de MySQL.
+    * Abrí el archivo de configuración y poné tu usuario y contraseña de MySQL.
     
     ```java
     // Ruta: src/main/java/ConsultorioMedico/util/Conexion.java
@@ -63,4 +64,4 @@ El objetivo principal es construir una aplicación de escritorio funcional aplic
     ```
 
 6.  **Ejecutar:**
-    * Buscá y ejecutá la clase principal: `src/main/java/Main.java`.
+    * Ejecutá la clase principal: `src/main/java/Main.java`.
